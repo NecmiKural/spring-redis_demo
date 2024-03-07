@@ -13,11 +13,9 @@ import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration
-// TODO: dikkat buraya
 @EnableRedisRepositories(basePackages = "com.example.redis.repository")
 public class RedisConfig {
 
-    // TODO: be sure about that, docker
     @Bean
     public JedisConnectionFactory connectionFactory() {
         RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration("localhost", 6379);
@@ -39,12 +37,4 @@ public class RedisConfig {
 
         return template;
     }
-
-//    @Bean
-//    @Primary
-//    public RedisTemplate<String, Product> redisTemplate(RedisConnectionFactory connectionFactory) {
-//        RedisTemplate<String, Product> template = new RedisTemplate<>();
-//        template.setConnectionFactory(connectionFactory);
-//        return template;
-//    }
 }
