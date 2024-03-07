@@ -2,6 +2,9 @@ package com.example.redis.repository;
 
 import com.example.redis.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -11,8 +14,11 @@ import java.util.List;
 @Repository
 public class ProductDao {
     public static final String HASH_KEY = "Product";
-    @Autowired
-    private RedisTemplate template;
+    private final RedisTemplate template;
+
+    public ProductDao(RedisTemplate template) {
+        this.template = template;
+    }
 
     public Product save(Product product) {
         template.opsForHash().put(HASH_KEY, product.getId(), product);
